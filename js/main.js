@@ -25,7 +25,7 @@ var jsApp	=
 		me.loader.onload = this.loaded.bind(this);
 		
 		// set all ressources to be loaded
-		me.loader.preload(g_ressources);
+		me.loader.preload(g_resources);
 
 		// load everything & display a loading screen
 		me.state.change(me.state.LOADING);
@@ -58,7 +58,7 @@ var jsApp	=
 	{	
 		me.game.reset();
 		// load a level
-		me.levelDirector.loadLevel("village");		
+		me.levelDirector.loadLevel("prototype");		
 	},
 
 	
