@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="25" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="meta_tileset" tilewidth="32" tileheight="32">
+  <image source="../images/meta_tileset.png" width="160" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="solid"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6" name="bg_tileset" tilewidth="32" tileheight="32">
+  <image source="../images/bg_tileset.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="70" name="bg_tileset2" tilewidth="32" tileheight="32">
+  <image source="../images/bg_tileset2.png" width="160" height="64"/>
+ </tileset>
+ <layer name="background" width="25" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyVlEsSwzAIQ3262ibN/a/TjZlRX4XjLpimmK8EvFprLyPzz/8pfUkcxKRuLJnrl3En/GLp1WaYeB3+U96ug/6Zgz2O9ltf6tUn9YE49BnNY6hvWqfLPeWNOA7YVBxqXmebOtbZxc/VRkzJNXvu4EnxH/Ann7F02YOLr/4Vh8plhTmx3s39qa3jj/PIHeKcVrlnkUN1ujs5O5rvMvVU8Zyee6Y7VeFQ3Zd846xUXO9E6+Xs69vu/nBWdzvk5rLaX1crb+Nuv/L+OW4dhhUHvKsqUej1xofJozEndC5HxV/26PoY7XsW9B4+zTDv79OuZR+8ucQvv/NWMU8v9CHvmveSvFqDmwXyFMaOc8QbUu1QFHaKl2LDHO7eOYyfOFBMqtu7E+IUJr7D4r3klu9KaHMf+n8AZIWtug==
+  </data>
+ </layer>
+ <objectgroup name="entities" width="25" height="25">
+  <object name="mainPlayer" x="244" y="122" width="16" height="16">
+   <properties>
+    <property name="image" value="sprite"/>
+    <property name="spriteheight" value="16"/>
+    <property name="spritewidth" value="16"/>
+   </properties>
+  </object>
+  <object name="enemySpawner" x="504" y="73" width="32" height="32"/>
+  <object name="enemyEntity" x="476" y="245" width="32" height="32">
+   <properties>
+    <property name="image" value="enemy"/>
+    <property name="spritewidth" value="32"/>
+   </properties>
+  </object>
+  <object name="enemyEntity" x="293" y="296" width="32" height="32">
+   <properties>
+    <property name="image" value="enemy"/>
+    <property name="spritewidth" value="32"/>
+   </properties>
+  </object>
+  <object name="enemyEntity" x="449" y="383" width="32" height="32">
+   <properties>
+    <property name="image" value="enemy"/>
+    <property name="spritewidth" value="32"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="collision" width="25" height="25" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQDpiUYtWPUjlE7Ru0YtWPUjlE7Ru0YbHbQGgMA31MAYQ==
+  </data>
+ </layer>
+</map>
