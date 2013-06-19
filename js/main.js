@@ -64,20 +64,6 @@ var jsApp   =
     
         // draw the rest of the game
         me.game.draw();
-    },
-    
-    /* ---
-    
-         change the current level 
-         using the listbox current value in the HTML file
-        
-        ---                                     */
-    changelevel: function() {
-        // reset everything
-        me.game.reset();
-        
-        // load the new level
-        me.levelDirector.loadLevel(level);      
     }
 
 }; // jsApp
