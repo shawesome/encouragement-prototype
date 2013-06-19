@@ -5,6 +5,10 @@ var PlayerEntity = me.ObjectEntity.extend({
         // call the parent constructor
         this.parent(x, y, settings);
         // walking animatin
+        this.renderable.addAnimation ("idle-down", [0]);
+        this.renderable.addAnimation ("idle-up", [6]);
+        this.renderable.addAnimation ("idle-right", [12]);
+        this.renderable.addAnimation ("idle-left", [12]);
         this.renderable.addAnimation ("walk-down", [0,1,2,3]);
         this.renderable.addAnimation ("walk-up", [6,7,8,9]);
         this.renderable.addAnimation ("walk-right", [12,13,14,15]);
@@ -12,11 +16,14 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.renderable.addAnimation ("attack-down", [4]);
         this.renderable.addAnimation ("attack-up", [10]);
         this.renderable.addAnimation ("attack-right", [16]);
+        this.renderable.addAnimation ("attack-left", [16]);
         
         // set the default horizontal & vertical speed (accel vector)
         this.setVelocity(3, 3);
 
         this.orientationStack = [];
+        this.orientation = '';
+        this.lastKnownOrientation = 'down';
     },
 
     /* update the player pos */
@@ -27,25 +34,26 @@ var PlayerEntity = me.ObjectEntity.extend({
         if (this.orientationStack.length) {
             // Pop the last element off the stack
             this.orientation = this.orientationStack.slice(-1)[0]
+            this.lastKnownOrientation = this.orientation;
         }
 
         var moved = this.handleMovement();
         var attacked = this.handleAttack();
 
         var took_action = moved || attacked;
-        if (took_action) {
-            this.parent(this);
+        if (!took_action) {
+            this.renderable.setCurrentAnimation("idle-" + this.lastKnownOrientation);
         }
+        this.parent(this);
 
-        return took_action;
+        return true;
     },
 
     handleAttack: function() {
         if (me.input.isKeyPressed('space')) {
-            this.renderable.setCurrentAnimation("attack");
+            this.renderable.setCurrentAnimation("attack-" + this.lastKnownOrientation);
             return true;
         }
-        return false;
     },
 
     getOrientation: function() {
