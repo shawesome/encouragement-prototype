@@ -1,11 +1,9 @@
 var jsApp   =
 {
     
-    /* ---
-    
-        Initialize the jsApp
-        
-        ---         */
+    /*
+     *    Initialize the jsApp
+     */
     onload: function() {
         
         if (!me.video.init('jsapp', 800, 480)) {
@@ -24,13 +22,10 @@ var jsApp   =
     },
     
     
-    /* ---
-    
-        callback when everything is loaded
-        
-        ---                                     */
-    loaded: function ()
-    {
+    /*
+     * callback when everything is loaded
+     */
+    loaded: function () {
         // set the "Play/Ingame" Screen Object
         me.state.set(me.state.PLAY, this);
         
@@ -50,19 +45,16 @@ var jsApp   =
         
     },
 
-    reset: function()
-    {   
+    reset: function() {   
         me.game.reset();
         // load a level
         me.levelDirector.loadLevel("prototype");        
     },
 
     
-    /* ---
-    
-         rendering loop
-        
-        ---                                     */
+    /*
+     * rendering loop
+     */
     onUpdateFrame: function() {
         // update the frame counter
         me.timer.update();
