@@ -41,6 +41,8 @@ var jsApp	=
 	{
 		// set the "Play/Ingame" Screen Object
 		me.state.set(me.state.PLAY, this);
+        
+        me.entityPool.add("player", PlayerEntity);
 
 		// enable the keyboard (to navigate in the map)
 		me.input.bindKey(me.input.KEY.LEFT,	 "left");
@@ -49,6 +51,9 @@ var jsApp	=
 		me.input.bindKey(me.input.KEY.DOWN,	 "down");
 		me.input.bindKey(me.input.KEY.ENTER, "enter");
 
+        // overrides the entity gravity values
+        me.sys.gravity = 0;
+         
 		// start the game
 		me.state.change(me.state.PLAY);
 		
