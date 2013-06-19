@@ -8,52 +8,93 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.renderable.addAnimation ("walk-down", [0,1,2,3]);
         this.renderable.addAnimation ("walk-up", [6,7,8,9]);
         this.renderable.addAnimation ("walk-right", [12,13,14,15]);
+        this.renderable.addAnimation ("walk-left", [12,13,14,15]);
+        this.renderable.addAnimation ("attack-down", [4]);
+        this.renderable.addAnimation ("attack-up", [10]);
+        this.renderable.addAnimation ("attack-right", [16]);
+        
         // set the default horizontal & vertical speed (accel vector)
         this.setVelocity(3, 3);
+
+        this.orientationStack = [];
     },
 
     /* update the player pos */
     update: function() {
-        if (me.input.isKeyPressed('left')) {
-            this.renderable.setCurrentAnimation("walk-right");
-            // flip the sprite on horizontal axis
-            this.flipX(true);
-            // update the entity velocity
-            this.vel.x -= this.accel.x * me.timer.tick;
-        } else if (me.input.isKeyPressed('right')) {
-            this.renderable.setCurrentAnimation("walk-right");
-            // unflip the sprite
-            this.flipX(false);
-            // update the entity velocity
-            this.vel.x += this.accel.x * me.timer.tick;
-        } else {
-            this.vel.x = 0;
+        this.getOrientation();
+
+
+        if (this.orientationStack.length) {
+            // Pop the last element off the stack
+            this.orientation = this.orientationStack.slice(-1)[0]
         }
-        
-        if (me.input.isKeyPressed('up')) {
-            this.renderable.setCurrentAnimation("walk-up");
-            // update the entity velocity
-            this.vel.y -= this.accel.y * me.timer.tick;
-        } else if (me.input.isKeyPressed('down')) {
-            this.renderable.setCurrentAnimation("walk-down");
-            // update the entity velocity
-            this.vel.y += this.accel.y * me.timer.tick;
+
+        var moved = this.handleMovement();
+        var attacked = this.handleAttack();
+
+        var took_action = moved || attacked;
+        if (took_action) {
+            this.parent(this);
+        }
+
+        return took_action;
+    },
+
+    handleAttack: function() {
+        if (me.input.isKeyPressed('space')) {
+            this.renderable.setCurrentAnimation("attack");
+            return true;
+        }
+        return false;
+    },
+
+    getOrientation: function() {
+        this.getOrientationAux('left');
+        this.getOrientationAux('right');
+        this.getOrientationAux('up');
+        this.getOrientationAux('down');
+    },
+
+    getOrientationAux: function(dir) {
+        if (me.input.isKeyPressed(dir)) {
+            if (this.orientationStack.indexOf(dir) == -1) 
+                this.orientationStack.push(dir);
         } else {
-            this.vel.y = 0;
+            if (this.orientationStack.indexOf(dir) != -1) {
+                this.orientationStack.remove(dir);
+            }
+        }
+    },
+
+    handleMovement: function() {
+        if (me.input.isKeyPressed(this.orientation)) {
+            this.renderable.setCurrentAnimation("walk-" + this.orientation);
+        }
+
+        this.vel.x = 0;
+        this.vel.y = 0;
+
+        if (this.orientation == 'left') {
+            this.vel.x -= this.accel.x * me.timer.tick;
+            this.flipX(true);
+        } else if (this.orientation == 'right') {
+            this.vel.x += this.accel.x * me.timer.tick;
+            this.flipX(false);
+        } else if (this.orientation == 'up') {
+            this.vel.y -= this.accel.x * me.timer.tick;
+        } else if (this.orientation == 'down') {
+            this.vel.y += this.accel.x * me.timer.tick;
         }
 
         // check & update player movement
         this.updateMovement();
-
-        // update animation if necessary
+        
+        // Do we need to update animation?
         if (this.vel.x!=0 || this.vel.y!=0) {
             // update objet animation
-            this.parent(this);
             return true;
         }
 
-        // else inform the engine we did not perform
-        // any update (e.g. position, animation)
         return false;
     }
 });
