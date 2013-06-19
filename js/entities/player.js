@@ -23,7 +23,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     update: function() {
         this.getOrientation();
 
-
+        this.orientation = '';
         if (this.orientationStack.length) {
             // Pop the last element off the stack
             this.orientation = this.orientationStack.slice(-1)[0]
