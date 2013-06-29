@@ -24,6 +24,8 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.orientationStack = [];
         this.orientation = '';
         this.lastKnownOrientation = 'down';
+        this.lastAttackTime = null;
+        this.attackTimer = 1000;
     },
 
     /* update the player pos */
@@ -51,7 +53,26 @@ var PlayerEntity = me.ObjectEntity.extend({
 
     handleAttack: function() {
         if (me.input.isKeyPressed('space')) {
+            // Update attack animation
             this.renderable.setCurrentAnimation("attack-" + this.lastKnownOrientation);
+
+            // Perform attack animation
+            var currentTime = me.timer.getTime();
+            var canAttack = true;
+            if (this.lastAttackTime != null) {
+                var timeSinceLastAttack = currentTime - this.lastAttackTime;
+                canAttack = timeSinceLastAttack > this.attackTimer; 
+            } else {
+                this.lastAttackTime = currentTime;
+            }
+
+            if (canAttack) {
+                // TODO the actual attack
+                // Log this time so we know for the next time the above logic is run
+                this.lastAttackTime = currentTime;
+            }
+
+
             return true;
         }
     },
