@@ -30,6 +30,8 @@ var jsApp   =
         me.state.set(me.state.PLAY, this);
         
         me.entityPool.add("player", PlayerEntity);
+		me.entityPool.add("player_fireball", FireballEntity);
+        
 
         // enable the keyboard (to navigate in the map)
         me.input.bindKey(me.input.KEY.LEFT,  "left");

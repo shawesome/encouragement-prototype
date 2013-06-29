@@ -25,7 +25,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.orientation = '';
         this.lastKnownOrientation = 'down';
         this.lastAttackTime = null;
-        this.attackTimer = 1000;
+        this.attackTimer = 250;
     },
 
     /* update the player pos */
@@ -67,7 +67,18 @@ var PlayerEntity = me.ObjectEntity.extend({
             }
 
             if (canAttack) {
-                // TODO the actual attack
+                var angle = 0;
+                if (this.lastKnownOrientation == 'down') {
+                    angle = Math.PI / 2;
+                } else if (this.lastKnownOrientation == 'left') {
+                    angle = Math.PI;
+                } else if (this.lastKnownOrientation == 'up') {
+                    angle = 6 * Math.PI / 4;
+                }
+                var fireball = new PlayerFireballEntity(this.pos.x, this.pos.y, angle);
+                me.game.add(fireball, this.z); 
+                me.game.sort();  
+                
                 // Log this time so we know for the next time the above logic is run
                 this.lastAttackTime = currentTime;
             }
