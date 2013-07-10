@@ -129,6 +129,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         // check & update player movement
         this.updateMovement();
         
+
         // Do we need to update animation?
         if (this.vel.x!=0 || this.vel.y!=0) {
             // update objet animation

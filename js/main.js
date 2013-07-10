@@ -19,6 +19,12 @@ var jsApp   =
 
         // load everything & display a loading screen
         me.state.change(me.state.LOADING);
+
+        me.game.onLevelLoaded = function() {
+
+            // make player a global variable
+            jsApp.player = me.game.getEntityByName("player")[0];
+        };
     },
     
     
@@ -33,8 +39,7 @@ var jsApp   =
 		me.entityPool.add("player_fireball", FireballEntity);
         me.entityPool.add("enemy", EnemyEntity);
         me.entityPool.add("enemy_spawner", EnemySpawnerEntity);
-        
-
+                
         // enable the keyboard (to navigate in the map)
         me.input.bindKey(me.input.KEY.LEFT,  "left");
         me.input.bindKey(me.input.KEY.RIGHT, "right");
