@@ -32,11 +32,10 @@
     <property name="spritewidth" value="32"/>
    </properties>
   </object>
-  <object name="enemy" x="173" y="150" width="32" height="32">
+  <object name="enemy_spawner" x="90" y="85">
    <properties>
-    <property name="image" value="enemy"/>
-    <property name="spriteheight" value="32"/>
-    <property name="spritewidth" value="32"/>
+    <property name="spawn_rate" value="60"/>
+    <property name="spawn_type" value="enemy"/>
    </properties>
   </object>
  </objectgroup>
