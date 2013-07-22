@@ -1,3 +1,18 @@
+var GameoverScreen = me.ScreenObject.extend({
+    onload: function() {
+    },
+    
+    loaded: function () {
+    },
+
+    reset: function() {   
+    },
+    
+    onUpdateFrame: function() {
+        console.log("GAMEOVER");
+    }
+});
+
 var jsApp   =
 {
     
@@ -34,6 +49,7 @@ var jsApp   =
     loaded: function () {
         // set the "Play/Ingame" Screen Object
         me.state.set(me.state.PLAY, this);
+        me.state.set(me.state.GAMEOVER, new GameoverScreen());
         
         me.entityPool.add("player", PlayerEntity);
 		me.entityPool.add("player_fireball", FireballEntity);
@@ -52,6 +68,10 @@ var jsApp   =
          
         // start the game
         me.state.change(me.state.PLAY);
+
+        // Picked these arbitrarily - Just didn't want them to be 0 since that's what type defaults to
+        me.game.FATAL_ENTITY = 5;
+        me.game.NONFATAL_ENTITY = 6;
         
     },
 
@@ -74,10 +94,13 @@ var jsApp   =
     
         // draw the rest of the game
         me.game.draw();
+    }, 
+
+    destroy: function() {
+        // do nothing
     }
 
 }; // jsApp
-
 
 //bootstrap :)
 window.onReady(function() {

@@ -128,6 +128,19 @@ var PlayerEntity = me.ObjectEntity.extend({
 
         // check & update player movement
         this.updateMovement();
+
+        // check for collision with other objects
+        var collisions = me.game.collide(this, true);
+        if (collisions.length) {
+            for (var i = 0; i < collisions.length; i++) { //for (var i = objlist.length; i-- ;)
+                var collision = collisions[i];
+
+                if (collision.type == me.game.FATAL_ENTITY) {
+                    // Just end the game for now
+                    me.state.change(me.state.GAMEOVER);
+                }
+            }
+        }
         
 
         // Do we need to update animation?
