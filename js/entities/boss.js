@@ -10,6 +10,7 @@ var BossEntity = me.ObjectEntity.extend({
 		this.setVelocity(3, 3);
 		this.lastAttackTime = null;
         this.attackTimer = 1000; 
+        this.type = me.game.FATAL_ENTITY; 
 	},
 
 	/* update the player pos */
