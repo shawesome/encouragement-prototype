@@ -5,16 +5,17 @@ var EnemyEntity = me.ObjectEntity.extend({
         // call the parent constructor
         this.parent(x, y, settings);
         this.renderable.addAnimation ("idle", [0]);
-        this.renderable.setCurrentAnimation("idle");
-        this.speed = 2;
-        this.type = me.game.FATAL_ENTITY;
-        
+        this.renderable.addAnimation ("moving", [0,1,2,3,4,5]);
+        this.renderable.setCurrentAnimation("moving");
+        this.speed = 1;   
+        this.type = me.game.FATAL_ENTITY;            
+
     },
 
     /* update the player pos */
     update: function() {
         this.parent(this);
-        this.moveTowardsPlayer();
+        this.moveTowardsPlayer();     
                 
         return false;
     },

@@ -54,6 +54,8 @@ var jsApp   =
         me.entityPool.add("player", PlayerEntity);
 		me.entityPool.add("player_fireball", FireballEntity);
         me.entityPool.add("enemy", EnemyEntity);
+        me.entityPool.add("boss", BossEntity);
+        me.entityPool.add("enemy_fireball", FireballEntity);
         me.entityPool.add("enemy_spawner", EnemySpawnerEntity);
                 
         // enable the keyboard (to navigate in the map)

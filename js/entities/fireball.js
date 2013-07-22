@@ -11,8 +11,8 @@ var FireballEntity = me.ObjectEntity.extend({
 
         // set the default horizontal & vertical speed (accel vector)
         var speed = 6;
-        this.xVel = Math.round(Math.cos(settings.angle)) * speed;
-        this.yVel = Math.round(Math.sin(settings.angle)) * speed;
+        this.xVel = Math.cos(settings.angle) * speed;
+        this.yVel = Math.sin(settings.angle) * speed;
     },
 
     update: function() {
@@ -43,5 +43,24 @@ var PlayerFireballEntity = FireballEntity.extend({
         };
         this.parent(x, y, settings);
         this.type = me.game.NONFATAL_ENTITY;
+    }
+});
+
+var EnemyFireballEntity = FireballEntity.extend({
+    init: function(x, y, angle) {
+        settings = {
+            gid: null,
+            height: 32,
+            width: 32,
+            image: "enemy_fireball",
+            isPolygon: false,
+            name: "enemy_fireball",
+            spriteheight: 32,
+            spritewidth: 32,
+            x: x,
+            y: y,
+            angle: angle
+        };
+        this.parent(x, y, settings);
     }
 });

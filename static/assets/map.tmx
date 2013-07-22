@@ -25,7 +25,7 @@
   </data>
  </layer>
  <objectgroup name="entities" width="25" height="25">
-  <object name="player" x="458" y="344" width="32" height="32">
+  <object name="player" x="456" y="341" width="32" height="32">
    <properties>
     <property name="image" value="player"/>
     <property name="spriteheight" value="32"/>
@@ -36,6 +36,13 @@
    <properties>
     <property name="spawn_rate" value="60"/>
     <property name="spawn_type" value="enemy"/>
+   </properties>
+  </object>
+  <object name="boss" x="637" y="105" width="32" height="32">
+   <properties>
+    <property name="image" value="boss"/>
+    <property name="spriteheight" value="32"/>
+    <property name="spritewidth" value="32"/>
    </properties>
   </object>
  </objectgroup>
