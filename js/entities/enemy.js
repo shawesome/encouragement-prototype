@@ -7,6 +7,7 @@ var EnemyEntity = me.ObjectEntity.extend({
         this.renderable.addAnimation ("idle", [0]);
         this.renderable.setCurrentAnimation("idle");
         this.speed = 2;
+        this.type = me.game.FATAL_ENTITY;
         
     },
 

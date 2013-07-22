@@ -42,5 +42,6 @@ var PlayerFireballEntity = FireballEntity.extend({
             angle: angle
         };
         this.parent(x, y, settings);
+        this.type = me.game.NONFATAL_ENTITY;
     }
 });

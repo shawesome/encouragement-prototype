@@ -5,6 +5,7 @@ var EnemySpawnerEntity = me.ObjectEntity.extend({
         this.spawnRate = settings.spawn_rate;
         this.spawnType = settings.spawn_type;
         this.spawnTimer = 0;
+        this.type = me.game.NONFATAL_ENTITY;
         
         // call the parent constructor
         this.parent(x, y, settings);
