@@ -58,12 +58,15 @@ var jsApp   =
         me.entityPool.add("enemy_fireball", FireballEntity);
         me.entityPool.add("enemy_spawner", EnemySpawnerEntity);
                 
-        // enable the keyboard (to navigate in the map)
-        me.input.bindKey(me.input.KEY.LEFT,  "left");
-        me.input.bindKey(me.input.KEY.RIGHT, "right");
-        me.input.bindKey(me.input.KEY.UP,    "up");
-        me.input.bindKey(me.input.KEY.DOWN,  "down");
-        me.input.bindKey(me.input.KEY.SPACE,  "space");
+        // enable the keyboard (to navigate and shoot in the map)
+        me.input.bindKey(me.input.KEY.LEFT, "shootLeft");
+        me.input.bindKey(me.input.KEY.RIGHT, "shootRight");
+        me.input.bindKey(me.input.KEY.UP, "shootUp");
+        me.input.bindKey(me.input.KEY.DOWN,"shootDown");
+        me.input.bindKey(me.input.KEY.A, "left");
+        me.input.bindKey(me.input.KEY.D, "right");
+        me.input.bindKey(me.input.KEY.W, "up");
+        me.input.bindKey(me.input.KEY.S, "down");
 
         // overrides the entity gravity values
         me.sys.gravity = 0;

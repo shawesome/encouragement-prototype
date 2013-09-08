@@ -52,40 +52,58 @@ var PlayerEntity = me.ObjectEntity.extend({
     },
 
     handleAttack: function() {
-        if (me.input.isKeyPressed('space')) {
-            // Update attack animation
-            this.renderable.setCurrentAnimation("attack-" + this.lastKnownOrientation);
-
-            // Perform attack animation
-            var currentTime = me.timer.getTime();
-            var canAttack = true;
-            if (this.lastAttackTime != null) {
-                var timeSinceLastAttack = currentTime - this.lastAttackTime;
-                canAttack = timeSinceLastAttack > this.attackTimer; 
-            } else {
-                this.lastAttackTime = currentTime;
-            }
-
-            if (canAttack) {
-                var angle = 0;
-                if (this.lastKnownOrientation == 'down') {
-                    angle = Math.PI / 2;
-                } else if (this.lastKnownOrientation == 'left') {
-                    angle = Math.PI;
-                } else if (this.lastKnownOrientation == 'up') {
-                    angle = 6 * Math.PI / 4;
-                }
-                var fireball = new PlayerFireballEntity(this.pos.x, this.pos.y, angle);
-                me.game.add(fireball, this.z); 
-                me.game.sort();  
-                
-                // Log this time so we know for the next time the above logic is run
-                this.lastAttackTime = currentTime;
-            }
-
-
-            return true;
+        var attackOrientation = null;
+        if (me.input.isKeyPressed('shootLeft')) {
+            attackOrientation = 'left';
+        } else if (me.input.isKeyPressed('shootDown')) {
+            attackOrientation = 'down';
+        } else if (me.input.isKeyPressed('shootRight')) {
+            attackOrientation = 'right';
+        } else if (me.input.isKeyPressed('shootUp')) {
+            attackOrientation = 'up';
+        } else {
+            // no attack logic should be done.
+            return false;
         }
+
+        // Update attack animation
+        this.renderable.setCurrentAnimation("attack-" + attackOrientation);
+        if (attackOrientation == 'left') {
+            this.flipX(true);
+        } else if (attackOrientation == 'right') {
+            this.flipX(false);
+        }
+
+        // Perform attack animation
+        var currentTime = me.timer.getTime();
+        var canAttack = true;
+        if (this.lastAttackTime != null) {
+            var timeSinceLastAttack = currentTime - this.lastAttackTime;
+            canAttack = timeSinceLastAttack > this.attackTimer; 
+        } else {
+            this.lastAttackTime = currentTime;
+        }
+
+        if (canAttack) {
+            var angle = 0;
+            if (attackOrientation == 'down') {
+                angle = Math.PI / 2;
+            } else if (attackOrientation == 'left') {
+                angle = Math.PI;
+            } else if (attackOrientation == 'up') {
+                angle = 6 * Math.PI / 4;
+            }
+            var fireball = new PlayerFireballEntity(this.pos.x, this.pos.y, angle);
+            me.game.add(fireball, this.z); 
+            me.game.sort();  
+            
+            // Log this time so we know for the next time the above logic is run
+            this.lastAttackTime = currentTime;
+        }
+
+
+        return true;
+        
     },
 
     getOrientation: function() {
